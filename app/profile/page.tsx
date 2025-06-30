@@ -28,7 +28,7 @@ export default function ProfilePage() {
     full_name: '',
     username: '',
     bio: '',
-    personality_type: 'real-me' as const
+    personality_type: 'real-me' as 'real-me' | 'my-mask' | 'crazy-self'
   });
 
   const router = useRouter();
@@ -301,7 +301,7 @@ export default function ProfilePage() {
                           name="personality_type"
                           value={type}
                           checked={editForm.personality_type === type}
-                          onChange={(e) => setEditForm(prev => ({ ...prev, personality_type: e.target.value as any }))}
+                          onChange={(e) => setEditForm(prev => ({ ...prev, personality_type: e.target.value as 'real-me' | 'my-mask' | 'crazy-self' }))}
                           className="w-4 h-4 text-blue-600"
                         />
                         <div className={`w-12 h-12 bg-gradient-to-r ${info.color} rounded-xl flex items-center justify-center`}>
