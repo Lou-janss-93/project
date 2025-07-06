@@ -49,24 +49,24 @@ export interface Translations {
 
   // Personalities
   personalities: {
-    realMe: string;
-    realMeDescription: string;
-    myMask: string;
-    myMaskDescription: string;
-    crazySelf: string;
-    crazySelfDescription: string;
+    roots: string;
+    rootsDescription: string;
+    mask: string;
+    maskDescription: string;
+    spark: string;
+    sparkDescription: string;
   };
 
   // Onboarding
   onboarding: {
     choosePersona: string;
     chooseDescription: string;
-    realMeTitle: string;
-    realMeDesc: string;
-    myMaskTitle: string;
-    myMaskDesc: string;
-    crazySelfTitle: string;
-    crazySelfDesc: string;
+    rootsTitle: string;
+    rootsDesc: string;
+    maskTitle: string;
+    maskDesc: string;
+    sparkTitle: string;
+    sparkDesc: string;
     clickToSelect: string;
     stepOf: string;
     greatChoice: string;
@@ -261,6 +261,29 @@ export interface Translations {
     yes: string;
     no: string;
   };
+
+  // Posts & Feed
+  posts: {
+    createPost: string;
+    recordVoice: string;
+    shareThought: string;
+    authenticMoment: string;
+    resonance: string;
+    comments: string;
+    voiceReply: string;
+    authenticityScore: string;
+    feedTitle: string;
+    allPersonas: string;
+    rootsFeed: string;
+    maskFeed: string;
+    sparkFeed: string;
+    noPostsYet: string;
+    createFirstPost: string;
+    recordingTip: string;
+    maxDuration: string;
+    postSuccess: string;
+    postFailed: string;
+  };
 }
 
 export const translations: Record<Language, Translations> = {
@@ -306,22 +329,22 @@ export const translations: Record<Language, Translations> = {
       realityDriftDescription: 'Unique technology that measures your authenticity in real-time during conversations.'
     },
     personalities: {
-      realMe: 'Real Me',
-      realMeDescription: 'Be completely yourself',
-      myMask: 'My Mask',
-      myMaskDescription: 'Present your best self',
-      crazySelf: 'Crazy Self',
-      crazySelfDescription: 'Show your wild side'
+      roots: 'Roots 🌱',
+      rootsDescription: 'Your authentic, grounded self',
+      mask: 'Mask 🎭',
+      maskDescription: 'Your curated, social self',
+      spark: 'Spark 🔥',
+      sparkDescription: 'Your wild, unfiltered energy'
     },
     onboarding: {
       choosePersona: 'Choose Your Persona',
       chooseDescription: 'How do you want to express yourself? Select the personality that best represents how you\'d like to interact and share your experiences.',
-      realMeTitle: 'Real Me',
-      realMeDesc: 'Authentic, genuine, and true to yourself. Share your real thoughts and experiences.',
-      myMaskTitle: 'My Mask',
-      myMaskDesc: 'A curated version of yourself. Present your best face to the world.',
-      crazySelfTitle: 'Crazy Self',
-      crazySelfDesc: 'Unleash your wild side. Be bold, spontaneous, and completely uninhibited.',
+      rootsTitle: 'Roots 🌱',
+      rootsDesc: 'Authentic, genuine, and grounded. Share your real thoughts and experiences from the heart.',
+      maskTitle: 'Mask 🎭',
+      maskDesc: 'A curated version of yourself. Present your best face to the world with intention.',
+      sparkTitle: 'Spark 🔥',
+      sparkDesc: 'Unleash your wild energy. Be bold, spontaneous, and completely uninhibited.',
       clickToSelect: 'Click to select',
       stepOf: 'Step 1 of 3',
       greatChoice: 'Great Choice!',
@@ -498,6 +521,27 @@ export const translations: Record<Language, Translations> = {
       yes: 'Yes',
       no: 'No'
     }
+    posts: {
+      createPost: 'Create Post',
+      recordVoice: 'Record Voice',
+      shareThought: 'Share Your Thoughts',
+      authenticMoment: 'Authentic Moment',
+      resonance: 'Resonance',
+      comments: 'Comments',
+      voiceReply: 'Voice Reply',
+      authenticityScore: 'Authenticity Score',
+      feedTitle: 'Community Feed',
+      allPersonas: 'All Personas',
+      rootsFeed: 'Roots Feed',
+      maskFeed: 'Mask Feed',
+      sparkFeed: 'Spark Feed',
+      noPostsYet: 'No posts yet',
+      createFirstPost: 'Create your first authentic moment',
+      recordingTip: 'Speak from the heart - authenticity is valued here',
+      maxDuration: 'Maximum 60 seconds',
+      postSuccess: 'Your authentic moment has been shared!',
+      postFailed: 'Failed to share post. Please try again.'
+    }
   },
   nl: {
     nav: {
@@ -541,22 +585,22 @@ export const translations: Record<Language, Translations> = {
       realityDriftDescription: 'Unieke technologie die je authenticiteit in real-time meet tijdens gesprekken.'
     },
     personalities: {
-      realMe: 'Real Me',
-      realMeDescription: 'Wees volledig jezelf',
-      myMask: 'My Mask',
-      myMaskDescription: 'Presenteer je beste zelf',
-      crazySelf: 'Crazy Self',
-      crazySelfDescription: 'Laat je wilde kant zien'
+      roots: 'Roots 🌱',
+      rootsDescription: 'Je authentieke, geaarde zelf',
+      mask: 'Mask 🎭',
+      maskDescription: 'Je gecureerde, sociale zelf',
+      spark: 'Spark 🔥',
+      sparkDescription: 'Je wilde, ongefilterde energie'
     },
     onboarding: {
       choosePersona: 'Kies Je Persona',
       chooseDescription: 'Hoe wil je jezelf uitdrukken? Selecteer de persoonlijkheid die het beste weergeeft hoe je wilt interacteren en je ervaringen wilt delen.',
-      realMeTitle: 'Real Me',
-      realMeDesc: 'Authentiek, oprecht en trouw aan jezelf. Deel je echte gedachten en ervaringen.',
-      myMaskTitle: 'My Mask',
-      myMaskDesc: 'Een gecureerde versie van jezelf. Presenteer je beste gezicht naar de wereld.',
-      crazySelfTitle: 'Crazy Self',
-      crazySelfDesc: 'Laat je wilde kant los. Wees gedurfd, spontaan en volledig ongeïnhibeerd.',
+      rootsTitle: 'Roots 🌱',
+      rootsDesc: 'Authentiek, oprecht en geaard. Deel je echte gedachten en ervaringen vanuit het hart.',
+      maskTitle: 'Mask 🎭',
+      maskDesc: 'Een gecureerde versie van jezelf. Presenteer je beste gezicht naar de wereld met intentie.',
+      sparkTitle: 'Spark 🔥',
+      sparkDesc: 'Laat je wilde energie los. Wees gedurfd, spontaan en volledig ongeïnhibeerd.',
       clickToSelect: 'Klik om te selecteren',
       stepOf: 'Stap 1 van 3',
       greatChoice: 'Geweldige Keuze!',
@@ -732,6 +776,27 @@ export const translations: Record<Language, Translations> = {
       finish: 'Voltooien',
       yes: 'Ja',
       no: 'Nee'
+    }
+    posts: {
+      createPost: 'Post Maken',
+      recordVoice: 'Stem Opnemen',
+      shareThought: 'Deel Je Gedachten',
+      authenticMoment: 'Authentiek Moment',
+      resonance: 'Resonantie',
+      comments: 'Reacties',
+      voiceReply: 'Stem Reactie',
+      authenticityScore: 'Authenticiteit Score',
+      feedTitle: 'Community Feed',
+      allPersonas: 'Alle Personas',
+      rootsFeed: 'Roots Feed',
+      maskFeed: 'Mask Feed',
+      sparkFeed: 'Spark Feed',
+      noPostsYet: 'Nog geen posts',
+      createFirstPost: 'Maak je eerste authentieke moment',
+      recordingTip: 'Spreek vanuit het hart - authenticiteit wordt hier gewaardeerd',
+      maxDuration: 'Maximaal 60 seconden',
+      postSuccess: 'Je authentieke moment is gedeeld!',
+      postFailed: 'Kon post niet delen. Probeer opnieuw.'
     }
   }
 };

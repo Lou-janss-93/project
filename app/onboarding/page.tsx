@@ -27,25 +27,25 @@ export default function OnboardingPage() {
 
   const personalityOptions: PersonalityOption[] = [
     {
-      id: 'real-me',
-      title: t.onboarding.realMeTitle,
-      description: t.onboarding.realMeDesc,
+      id: 'roots',
+      title: t.onboarding.rootsTitle,
+      description: t.onboarding.rootsDesc,
       icon: User,
       gradient: 'from-blue-500 via-blue-600 to-indigo-700',
       hoverGradient: 'from-blue-400 via-blue-500 to-indigo-600'
     },
     {
-      id: 'my-mask',
-      title: t.onboarding.myMaskTitle,
-      description: t.onboarding.myMaskDesc,
+      id: 'mask',
+      title: t.onboarding.maskTitle,
+      description: t.onboarding.maskDesc,
       icon: Mask,
       gradient: 'from-purple-500 via-violet-600 to-purple-700',
       hoverGradient: 'from-purple-400 via-violet-500 to-purple-600'
     },
     {
-      id: 'crazy-self',
-      title: t.onboarding.crazySelfTitle,
-      description: t.onboarding.crazySelfDesc,
+      id: 'spark',
+      title: t.onboarding.sparkTitle,
+      description: t.onboarding.sparkDesc,
       icon: Zap,
       gradient: 'from-orange-500 via-red-500 to-pink-600',
       hoverGradient: 'from-orange-400 via-red-400 to-pink-500'

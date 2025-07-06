@@ -27,7 +27,7 @@ export interface Profile {
   username?: string;
   full_name?: string;
   avatar_url?: string;
-  personality_type: 'real-me' | 'my-mask' | 'crazy-self';
+  personality_type: 'roots' | 'mask' | 'spark';
   bio?: string;
   created_at: string;
   updated_at: string;
@@ -57,6 +57,37 @@ export interface VoiceProfile {
   user_id: string;
   audio_url: string;
   analysis_data?: any;
+  created_at: string;
+}
+
+export interface Post {
+  id: string;
+  user_id: string;
+  content?: string;
+  audio_url?: string;
+  persona_type: 'roots' | 'mask' | 'spark';
+  authenticity_score?: number;
+  resonance_count: number;
+  comment_count: number;
+  created_at: string;
+  updated_at: string;
+  profiles?: Profile;
+}
+
+export interface PostComment {
+  id: string;
+  post_id: string;
+  user_id: string;
+  content?: string;
+  audio_url?: string;
+  created_at: string;
+  profiles?: Profile;
+}
+
+export interface PostResonance {
+  id: string;
+  post_id: string;
+  user_id: string;
   created_at: string;
 }
 
@@ -100,7 +131,7 @@ export const getProfile = async (userId: string) => {
     }
     
     // Create default demo profile
-    const personality = localStorage.getItem('userPersonality') || 'real-me';
+    const personality = localStorage.getItem('userPersonality') || 'roots';
     const mockProfile = {
       id: userId,
       email: 'demo@realtalk.com',
@@ -149,7 +180,7 @@ export const updateProfile = async (userId: string, updates: Partial<Profile>) =
 export const demoSignUp = async (email: string, password: string, fullName: string) => {
   if (!DEMO_MODE) throw new Error('Demo mode not active');
   
-  const personality = localStorage.getItem('userPersonality') || 'real-me';
+  const personality = localStorage.getItem('userPersonality') || 'roots';
   const mockUser = createMockUser(email, personality);
   const mockProfile = {
     id: mockUser.id,
@@ -170,7 +201,7 @@ export const demoSignIn = async (email: string, password: string) => {
   if (!DEMO_MODE) throw new Error('Demo mode not active');
   
   // For demo, accept any email/password
-  const personality = localStorage.getItem('userPersonality') || 'real-me';
+  const personality = localStorage.getItem('userPersonality') || 'roots';
   const mockUser = createMockUser(email, personality);
   const mockProfile = {
     id: mockUser.id,
@@ -191,6 +222,176 @@ export const demoSignOut = async () => {
   localStorage.removeItem('demoUser');
   localStorage.removeItem('demoProfile');
   localStorage.removeItem('userPersonality');
+};
+
+// Posts helpers
+export const createPost = async (userId: string, content: string, audioBlob?: Blob, personaType: 'roots' | 'mask' | 'spark' = 'roots') => {
+  if (DEMO_MODE) {
+    // Mock post creation for demo
+    const mockPost: Post = {
+      id: 'demo_post_' + Date.now(),
+      user_id: userId,
+      content,
+      audio_url: audioBlob ? URL.createObjectURL(audioBlob) : undefined,
+      persona_type: personaType,
+      authenticity_score: Math.floor(Math.random() * 40) + 60, // 60-100 for demo
+      resonance_count: 0,
+      comment_count: 0,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString()
+    };
+    
+    // Store in localStorage for demo
+    const existingPosts = JSON.parse(localStorage.getItem('demoPosts') || '[]');
+    existingPosts.unshift(mockPost);
+    localStorage.setItem('demoPosts', JSON.stringify(existingPosts));
+    
+    return mockPost;
+  }
+
+  if (!supabase) throw new Error('Supabase client not initialized');
+  
+  let audioUrl = null;
+  if (audioBlob) {
+    const fileName = `posts/${userId}/${Date.now()}.webm`;
+    const { data: uploadData, error: uploadError } = await supabase.storage
+      .from('post-audio')
+      .upload(fileName, audioBlob);
+    
+    if (uploadError) throw uploadError;
+    
+    const { data: { publicUrl } } = supabase.storage
+      .from('post-audio')
+      .getPublicUrl(fileName);
+    
+    audioUrl = publicUrl;
+  }
+
+  const { data, error } = await supabase
+    .from('posts')
+    .insert({
+      user_id: userId,
+      content,
+      audio_url: audioUrl,
+      persona_type: personaType,
+      authenticity_score: Math.floor(Math.random() * 40) + 60 // Placeholder scoring
+    })
+    .select(`
+      *,
+      profiles(id, full_name, username, avatar_url, personality_type)
+    `)
+    .single();
+  
+  if (error) throw error;
+  return data as Post;
+};
+
+export const getPosts = async (personaFilter?: 'roots' | 'mask' | 'spark') => {
+  if (DEMO_MODE) {
+    // Return mock posts from localStorage
+    const posts = JSON.parse(localStorage.getItem('demoPosts') || '[]');
+    const profile = JSON.parse(localStorage.getItem('demoProfile') || '{}');
+    
+    // Add profile data to posts
+    const postsWithProfile = posts.map((post: Post) => ({
+      ...post,
+      profiles: profile
+    }));
+    
+    if (personaFilter) {
+      return postsWithProfile.filter((post: Post) => post.persona_type === personaFilter);
+    }
+    
+    return postsWithProfile;
+  }
+
+  if (!supabase) throw new Error('Supabase client not initialized');
+  
+  let query = supabase
+    .from('posts')
+    .select(`
+      *,
+      profiles(id, full_name, username, avatar_url, personality_type)
+    `)
+    .order('created_at', { ascending: false });
+  
+  if (personaFilter) {
+    query = query.eq('persona_type', personaFilter);
+  }
+  
+  const { data, error } = await query;
+  if (error) throw error;
+  return data as Post[];
+};
+
+export const toggleResonance = async (postId: string, userId: string) => {
+  if (DEMO_MODE) {
+    // Mock resonance toggle for demo
+    const posts = JSON.parse(localStorage.getItem('demoPosts') || '[]');
+    const postIndex = posts.findIndex((p: Post) => p.id === postId);
+    
+    if (postIndex !== -1) {
+      const resonances = JSON.parse(localStorage.getItem('demoResonances') || '[]');
+      const existingResonance = resonances.find((r: any) => r.post_id === postId && r.user_id === userId);
+      
+      if (existingResonance) {
+        // Remove resonance
+        const newResonances = resonances.filter((r: any) => !(r.post_id === postId && r.user_id === userId));
+        localStorage.setItem('demoResonances', JSON.stringify(newResonances));
+        posts[postIndex].resonance_count = Math.max(0, posts[postIndex].resonance_count - 1);
+      } else {
+        // Add resonance
+        resonances.push({
+          id: 'demo_resonance_' + Date.now(),
+          post_id: postId,
+          user_id: userId,
+          created_at: new Date().toISOString()
+        });
+        localStorage.setItem('demoResonances', JSON.stringify(resonances));
+        posts[postIndex].resonance_count += 1;
+      }
+      
+      localStorage.setItem('demoPosts', JSON.stringify(posts));
+      return posts[postIndex];
+    }
+    return null;
+  }
+
+  if (!supabase) throw new Error('Supabase client not initialized');
+  
+  // Check if resonance already exists
+  const { data: existingResonance } = await supabase
+    .from('post_resonances')
+    .select('id')
+    .eq('post_id', postId)
+    .eq('user_id', userId)
+    .single();
+  
+  if (existingResonance) {
+    // Remove resonance
+    await supabase
+      .from('post_resonances')
+      .delete()
+      .eq('post_id', postId)
+      .eq('user_id', userId);
+  } else {
+    // Add resonance
+    await supabase
+      .from('post_resonances')
+      .insert({ post_id: postId, user_id: userId });
+  }
+  
+  // Return updated post
+  const { data: updatedPost } = await supabase
+    .from('posts')
+    .select(`
+      *,
+      profiles(id, full_name, username, avatar_url, personality_type)
+    `)
+    .eq('id', postId)
+    .single();
+  
+  return updatedPost;
 };
 
 // Matching helpers

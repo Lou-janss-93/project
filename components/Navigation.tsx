@@ -58,6 +58,7 @@ export default function Navigation({ user }: NavigationProps) {
 
   const navItems = [
     { href: '/dashboard', label: t.nav.dashboard, icon: Home },
+    { href: '/feed', label: t.posts.feedTitle, icon: MessageCircle },
     { href: '/matching', label: t.nav.findMatch, icon: Users },
     { href: '/conversations', label: t.nav.conversations, icon: MessageCircle },
     { href: '/voice-capture', label: t.nav.voiceSetup, icon: Mic },

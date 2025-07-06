@@ -52,23 +52,23 @@ export default function LandingPage() {
 
   const personalities = [
     {
-      id: 'real-me',
-      title: t.personalities.realMe,
-      description: t.personalities.realMeDescription,
+      id: 'roots',
+      title: t.personalities.roots,
+      description: t.personalities.rootsDescription,
       icon: Heart,
       color: 'from-blue-500 to-indigo-600'
     },
     {
-      id: 'my-mask',
-      title: t.personalities.myMask,
-      description: t.personalities.myMaskDescription,
+      id: 'mask',
+      title: t.personalities.mask,
+      description: t.personalities.maskDescription,
       icon: Star,
       color: 'from-purple-500 to-violet-600'
     },
     {
-      id: 'crazy-self',
-      title: t.personalities.crazySelf,
-      description: t.personalities.crazySelfDescription,
+      id: 'spark',
+      title: t.personalities.spark,
+      description: t.personalities.sparkDescription,
       icon: Zap,
       color: 'from-orange-500 to-pink-600'
     }
