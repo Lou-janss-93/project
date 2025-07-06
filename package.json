@@ -1,15 +1,14 @@
 {
-  "name": "nextjs",
-  "version": "0.1.0",
+  "name": "realtalk",
+  "version": "1.0.0",
+  "description": "Authentic conversations platform with personality-based matching",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:production": "NODE_ENV=production next build",
     "start": "next start",
     "lint": "next lint",
-    "export": "next export",
-    "deploy": "npm run build && npm run export"
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.0",
@@ -72,5 +71,25 @@
     "typescript": "5.2.2",
     "vaul": "^0.9.9",
     "zod": "^3.23.8"
-  }
+  },
+  "keywords": [
+    "social",
+    "conversations",
+    "authenticity",
+    "voice",
+    "personality",
+    "matching",
+    "nextjs",
+    "supabase",
+    "typescript"
+  ],
+  "author": "RealTalk Team",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/your-username/realtalk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/your-username/realtalk/issues"
+  },
+  "homepage": "https://your-netlify-url.netlify.app"
 }
