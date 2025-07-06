@@ -117,17 +117,17 @@ export default function ProfilePage() {
     try {
       // Get all user posts
       const allPosts = await getPosts();
-      const userPosts = allPosts.filter(post => post.user_id === userId);
+      const userPosts = allPosts.filter((post: Post) => post.user_id === userId);
 
       // Calculate persona distribution
-      const rootsPosts = userPosts.filter(p => p.persona_type === 'roots');
-      const maskPosts = userPosts.filter(p => p.persona_type === 'mask');
-      const sparkPosts = userPosts.filter(p => p.persona_type === 'spark');
+      const rootsPosts = userPosts.filter((p: Post) => p.persona_type === 'roots');
+      const maskPosts = userPosts.filter((p: Post) => p.persona_type === 'mask');
+      const sparkPosts = userPosts.filter((p: Post) => p.persona_type === 'spark');
 
       // Calculate average authenticity score
-      const postsWithScores = userPosts.filter(p => p.authenticity_score);
+      const postsWithScores = userPosts.filter((p: Post) => p.authenticity_score);
       const avgScore = postsWithScores.length > 0 
-        ? postsWithScores.reduce((sum, p) => sum + (p.authenticity_score || 0), 0) / postsWithScores.length
+        ? postsWithScores.reduce((sum: number, p: Post) => sum + (p.authenticity_score || 0), 0) / postsWithScores.length
         : 0;
 
       setPersonaStats({
