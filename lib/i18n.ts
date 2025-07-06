@@ -520,7 +520,7 @@ export const translations: Record<Language, Translations> = {
       finish: 'Finish',
       yes: 'Yes',
       no: 'No'
-    }
+    },
     posts: {
       createPost: 'Create Post',
       recordVoice: 'Record Voice',
@@ -776,7 +776,7 @@ export const translations: Record<Language, Translations> = {
       finish: 'Voltooien',
       yes: 'Ja',
       no: 'Nee'
-    }
+    },
     posts: {
       createPost: 'Post Maken',
       recordVoice: 'Stem Opnemen',
