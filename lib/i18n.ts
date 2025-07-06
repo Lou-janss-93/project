@@ -338,7 +338,7 @@ export const translations: Record<Language, Translations> = {
     },
     onboarding: {
       choosePersona: 'Choose Your Persona',
-      chooseDescription: 'How do you want to express yourself? Select the personality that best represents how you\'d like to interact and share your experiences.',
+      chooseDescription: 'Select how you want to present yourself: Roots, Mask, or Spark.',
       rootsTitle: 'Roots 🌱',
       rootsDesc: 'Authentic, genuine, and grounded. Share your real thoughts and experiences from the heart.',
       maskTitle: 'Mask 🎭',
@@ -594,7 +594,7 @@ export const translations: Record<Language, Translations> = {
     },
     onboarding: {
       choosePersona: 'Kies Je Persona',
-      chooseDescription: 'Hoe wil je jezelf uitdrukken? Selecteer de persoonlijkheid die het beste weergeeft hoe je wilt interacteren en je ervaringen wilt delen.',
+      chooseDescription: 'Selecteer hoe je jezelf wilt presenteren: Roots, Mask, of Spark.',
       rootsTitle: 'Roots 🌱',
       rootsDesc: 'Authentiek, oprecht en geaard. Deel je echte gedachten en ervaringen vanuit het hart.',
       maskTitle: 'Mask 🎭',
