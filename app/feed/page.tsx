@@ -246,11 +246,11 @@ export default function FeedPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100">
+    <div className="min-h-screen gradient-mesh">
       <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+          <h1 className="text-4xl font-bold text-gradient-blue mb-4">
             {t.posts.feedTitle}
           </h1>
           <p className="text-xl text-gray-600">
@@ -260,7 +260,7 @@ export default function FeedPage() {
 
         {/* Filter Tabs */}
         <div className="flex items-center justify-between mb-8">
-          <div className="flex space-x-2 bg-white rounded-2xl p-2 shadow-lg">
+          <div className="flex space-x-2 glass-card rounded-2xl p-2">
             {[
               { key: 'all', label: t.posts.allPersonas, icon: Sparkles },
               { key: 'roots', label: t.posts.rootsFeed, icon: User },
@@ -274,8 +274,8 @@ export default function FeedPage() {
                   onClick={() => setActiveFilter(filter.key as PersonaFilter)}
                   className={`flex items-center space-x-2 px-4 py-2 rounded-xl transition-all duration-300 ${
                     activeFilter === filter.key
-                      ? 'bg-blue-500 text-white shadow-lg'
-                      : 'text-gray-600 hover:bg-gray-100'
+                      ? 'bg-gradient-to-r from-blue-500 to-purple-600 text-white glow-blue'
+                      : 'text-gray-600 glass-button'
                   }`}
                 >
                   <IconComponent className="w-4 h-4" />
@@ -288,7 +288,7 @@ export default function FeedPage() {
           {/* Create Post Button */}
           <button
             onClick={() => setShowCreatePost(true)}
-            className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-2xl font-medium hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg"
+            className="flex items-center space-x-2 px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-2xl font-medium hover:from-blue-600 hover:to-purple-700 transition-all duration-300 floating-element glow-blue"
           >
             <Plus className="w-5 h-5" />
             <span>{t.posts.createPost}</span>
@@ -298,7 +298,7 @@ export default function FeedPage() {
         {/* Create Post Modal */}
         {showCreatePost && (
           <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-3xl p-8 max-w-md w-full shadow-2xl">
+            <div className="glass-card rounded-3xl p-8 max-w-md w-full floating-element">
               <h3 className="text-2xl font-bold text-gray-900 mb-6">
                 {t.posts.shareThought}
               </h3>
@@ -316,10 +316,10 @@ export default function FeedPage() {
                       <button
                         key={persona}
                         onClick={() => setSelectedPersona(persona)}
-                        className={`p-3 rounded-xl border-2 transition-all duration-300 ${
+                        className={`p-3 rounded-xl border-2 transition-all duration-300 floating-element ${
                           selectedPersona === persona
-                            ? 'border-blue-500 bg-blue-50'
-                            : 'border-gray-200 hover:border-gray-300'
+                            ? 'border-blue-500 glass-strong glow-blue'
+                            : 'border-white/30 glass-button'
                         }`}
                       >
                         <IconComponent className="w-6 h-6 mx-auto mb-2 text-gray-700" />
@@ -338,7 +338,7 @@ export default function FeedPage() {
                   value={postContent}
                   onChange={(e) => setPostContent(e.target.value)}
                   placeholder={t.posts.recordingTip}
-                  className="w-full p-4 border border-gray-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                  className="w-full p-4 glass-input rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-500/50 focus:border-transparent resize-none"
                   rows={3}
                 />
               </div>
@@ -351,9 +351,9 @@ export default function FeedPage() {
                       onClick={isRecording ? stopRecording : startRecording}
                       className={`w-20 h-20 rounded-full flex items-center justify-center transition-all duration-300 ${
                         isRecording
-                          ? 'bg-red-500 hover:bg-red-600 animate-pulse'
-                          : 'bg-blue-500 hover:bg-blue-600'
-                      } text-white shadow-lg hover:shadow-xl transform hover:scale-105`}
+                          ? 'bg-gradient-to-r from-red-500 to-pink-500 animate-pulse glow-orange'
+                          : 'bg-gradient-to-r from-blue-500 to-purple-600 glow-blue'
+                      } text-white floating-element`}
                     >
                       {isRecording ? (
                         <MicOff className="w-8 h-8" />
@@ -363,10 +363,12 @@ export default function FeedPage() {
                     </button>
                   ) : (
                     <div className="space-y-3">
-                      <audio controls src={recordedAudio.url} className="w-full" />
+                      <div className="glass-subtle rounded-xl p-4">
+                        <audio controls src={recordedAudio.url} className="w-full" />
+                      </div>
                       <button
                         onClick={() => setRecordedAudio(null)}
-                        className="text-sm text-red-600 hover:text-red-700"
+                        className="text-sm text-red-600 hover:text-red-700 transition-colors"
                       >
                         Record again
                       </button>
@@ -386,14 +388,14 @@ export default function FeedPage() {
                     setPostContent('');
                     setRecordedAudio(null);
                   }}
-                  className="flex-1 px-4 py-3 border border-gray-300 text-gray-700 rounded-xl hover:bg-gray-50 transition-colors"
+                  className="flex-1 px-4 py-3 glass-button text-gray-700 rounded-xl transition-all duration-300"
                 >
                   Cancel
                 </button>
                 <button
                   onClick={handleCreatePost}
                   disabled={!postContent.trim() && !recordedAudio}
-                  className="flex-1 px-4 py-3 bg-blue-500 text-white rounded-xl hover:bg-blue-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="flex-1 px-4 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl hover:from-blue-600 hover:to-purple-700 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed glow-blue"
                 >
                   Share
                 </button>
@@ -417,7 +419,7 @@ export default function FeedPage() {
               </p>
               <button
                 onClick={() => setShowCreatePost(true)}
-                className="px-6 py-3 bg-blue-500 text-white rounded-xl font-medium hover:bg-blue-600 transition-colors"
+                className="px-6 py-3 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl font-medium hover:from-blue-600 hover:to-purple-700 transition-all duration-300 floating-element glow-blue"
               >
                 {t.posts.createPost}
               </button>
@@ -428,12 +430,12 @@ export default function FeedPage() {
               const PersonaIcon = personaInfo.icon;
               
               return (
-                <div key={post.id} className="bg-white rounded-3xl p-6 shadow-lg border border-gray-100">
+                <div key={post.id} className="glass-card rounded-3xl p-6 floating-element">
                   {/* Post Header */}
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center space-x-3">
                       {/* User Avatar */}
-                      <div className="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full flex items-center justify-center">
+                      <div className="w-12 h-12 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full flex items-center justify-center glow-purple">
                         <User className="w-6 h-6 text-white" />
                       </div>
                       
@@ -471,11 +473,11 @@ export default function FeedPage() {
 
                   {/* Audio Content */}
                   {post.audio_url && (
-                    <div className="mb-4 p-4 bg-gray-50 rounded-2xl">
+                    <div className="mb-4 p-4 glass-subtle rounded-2xl">
                       <div className="flex items-center space-x-3">
                         <button
                           onClick={() => playAudio(post.audio_url!, post.id)}
-                          className="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center text-white hover:bg-blue-600 transition-colors"
+                          className="w-12 h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center text-white hover:from-blue-600 hover:to-purple-700 transition-all duration-300 glow-blue floating-element"
                         >
                           {playingAudio === post.id ? (
                             <Pause className="w-6 h-6" />
@@ -489,7 +491,7 @@ export default function FeedPage() {
                             <span className="text-sm text-gray-600">Voice message</span>
                           </div>
                           <div className="w-full bg-gray-200 rounded-full h-2 mt-2">
-                            <div className="bg-blue-500 h-2 rounded-full w-1/3"></div>
+                            <div className="bg-gradient-to-r from-blue-500 to-purple-600 h-2 rounded-full w-1/3"></div>
                           </div>
                         </div>
                       </div>
@@ -497,10 +499,10 @@ export default function FeedPage() {
                   )}
 
                   {/* Post Actions */}
-                  <div className="flex items-center justify-between pt-4 border-t border-gray-100">
+                  <div className="flex items-center justify-between pt-4 border-t border-white/30">
                     <button
                       onClick={() => handleResonance(post.id)}
-                      className="flex items-center space-x-2 px-4 py-2 rounded-xl hover:bg-gray-50 transition-colors group"
+                      className="flex items-center space-x-2 px-4 py-2 rounded-xl glass-button transition-all duration-300 group floating-element"
                     >
                       <Heart className="w-5 h-5 text-gray-500 group-hover:text-red-500 transition-colors" />
                       <span className="text-gray-600 group-hover:text-gray-900">
@@ -508,7 +510,7 @@ export default function FeedPage() {
                       </span>
                     </button>
 
-                    <button className="flex items-center space-x-2 px-4 py-2 rounded-xl hover:bg-gray-50 transition-colors group">
+                    <button className="flex items-center space-x-2 px-4 py-2 rounded-xl glass-button transition-all duration-300 group floating-element">
                       <MessageCircle className="w-5 h-5 text-gray-500 group-hover:text-blue-500 transition-colors" />
                       <span className="text-gray-600 group-hover:text-gray-900">
                         {post.comment_count} {t.posts.comments}
