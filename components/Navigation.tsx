@@ -67,24 +67,24 @@ export default function Navigation({ user }: NavigationProps) {
   return (
     <>
       {/* Desktop Navigation */}
-      <nav className="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-40">
+      <nav className="glass-nav sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <Link href="/dashboard" className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+              <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center glow-blue floating-element">
                 <Users className="w-6 h-6 text-white" />
               </div>
-              <span className="text-xl font-bold text-gray-900">RealTalk</span>
+              <span className="text-xl font-bold text-gradient-blue">RealTalk</span>
               {isDemoMode && (
-                <span className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded-full font-medium">
+                <span className="px-2 py-1 glass-button text-blue-800 text-xs rounded-full font-medium">
                   Demo
                 </span>
               )}
             </Link>
 
             {/* Desktop Menu */}
-            <div className="hidden md:flex items-center space-x-8">
+            <div className="hidden md:flex items-center space-x-2">
               {navItems.map((item) => {
                 const IconComponent = item.icon;
                 const isActive = pathname === item.href;
@@ -92,10 +92,10 @@ export default function Navigation({ user }: NavigationProps) {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`flex items-center space-x-2 px-3 py-2 rounded-lg transition-colors ${
+                    className={`flex items-center space-x-2 px-4 py-2 rounded-xl transition-all duration-300 floating-element ${
                       isActive 
-                        ? 'bg-blue-100 text-blue-700' 
-                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                        ? 'glass-strong text-blue-700 glow-blue' 
+                        : 'text-gray-600 hover:text-gray-900 glass-button'
                     }`}
                   >
                     <IconComponent className="w-4 h-4" />
@@ -114,10 +114,10 @@ export default function Navigation({ user }: NavigationProps) {
               />
 
               {/* Notifications */}
-              <button className="relative p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors">
+              <button className="relative p-2 text-gray-600 hover:text-gray-900 glass-button rounded-xl transition-all duration-300 floating-element">
                 <Bell className="w-5 h-5" />
                 {notifications > 0 && (
-                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
+                  <span className="absolute -top-1 -right-1 w-5 h-5 bg-gradient-to-r from-red-500 to-pink-500 text-white text-xs rounded-full flex items-center justify-center animate-pulse-slow">
                     {notifications}
                   </span>
                 )}
@@ -125,8 +125,8 @@ export default function Navigation({ user }: NavigationProps) {
 
               {/* User Profile */}
               <div className="relative group">
-                <button className="flex items-center space-x-2 p-2 rounded-lg hover:bg-gray-100 transition-colors">
-                  <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full flex items-center justify-center">
+                <button className="flex items-center space-x-2 p-2 rounded-xl glass-button transition-all duration-300 floating-element">
+                  <div className="w-8 h-8 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-full flex items-center justify-center glow-purple">
                     <User className="w-4 h-4 text-white" />
                   </div>
                   <span className="hidden md:block text-sm font-medium text-gray-700">
@@ -135,26 +135,26 @@ export default function Navigation({ user }: NavigationProps) {
                 </button>
 
                 {/* Dropdown Menu */}
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-xl shadow-lg border border-gray-200 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 z-50">
+                <div className="absolute right-0 mt-2 w-48 glass-card rounded-2xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 floating-element">
                   <div className="py-2">
                     <Link
                       href="/profile"
-                      className="flex items-center space-x-2 px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors"
+                      className="flex items-center space-x-2 px-4 py-3 text-gray-700 hover:bg-white/50 transition-all duration-300 rounded-xl mx-2"
                     >
                       <User className="w-4 h-4" />
                       <span>{t.nav.profile}</span>
                     </Link>
                     <Link
                       href="/settings"
-                      className="flex items-center space-x-2 px-4 py-2 text-gray-700 hover:bg-gray-100 transition-colors"
+                      className="flex items-center space-x-2 px-4 py-3 text-gray-700 hover:bg-white/50 transition-all duration-300 rounded-xl mx-2"
                     >
                       <Settings className="w-4 h-4" />
                       <span>{t.nav.settings}</span>
                     </Link>
-                    <hr className="my-2 border-gray-200" />
+                    <hr className="my-2 border-white/30" />
                     <button
                       onClick={handleSignOut}
-                      className="flex items-center space-x-2 px-4 py-2 text-red-600 hover:bg-red-50 transition-colors w-full text-left"
+                      className="flex items-center space-x-2 px-4 py-3 text-red-600 hover:bg-red-50/50 transition-all duration-300 w-full text-left rounded-xl mx-2"
                     >
                       <LogOut className="w-4 h-4" />
                       <span>{t.nav.logout}</span>
@@ -166,7 +166,7 @@ export default function Navigation({ user }: NavigationProps) {
               {/* Mobile Menu Button */}
               <button
                 onClick={() => setIsMenuOpen(!isMenuOpen)}
-                className="md:hidden p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                className="md:hidden p-2 text-gray-600 hover:text-gray-900 glass-button rounded-xl transition-all duration-300"
               >
                 {isMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
               </button>
@@ -176,7 +176,7 @@ export default function Navigation({ user }: NavigationProps) {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white border-t border-gray-200">
+          <div className="md:hidden glass-card border-t border-white/30">
             <div className="px-4 py-4 space-y-2">
               {navItems.map((item) => {
                 const IconComponent = item.icon;
@@ -186,10 +186,10 @@ export default function Navigation({ user }: NavigationProps) {
                     key={item.href}
                     href={item.href}
                     onClick={() => setIsMenuOpen(false)}
-                    className={`flex items-center space-x-3 px-3 py-3 rounded-lg transition-colors ${
+                    className={`flex items-center space-x-3 px-4 py-3 rounded-xl transition-all duration-300 ${
                       isActive 
-                        ? 'bg-blue-100 text-blue-700' 
-                        : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                        ? 'glass-strong text-blue-700 glow-blue' 
+                        : 'text-gray-600 hover:text-gray-900 glass-button'
                     }`}
                   >
                     <IconComponent className="w-5 h-5" />
@@ -198,12 +198,12 @@ export default function Navigation({ user }: NavigationProps) {
                 );
               })}
               
-              <hr className="my-4 border-gray-200" />
+              <hr className="my-4 border-white/30" />
               
               <Link
                 href="/profile"
                 onClick={() => setIsMenuOpen(false)}
-                className="flex items-center space-x-3 px-3 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                className="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:text-gray-900 glass-button rounded-xl transition-all duration-300"
               >
                 <User className="w-5 h-5" />
                 <span className="font-medium">{t.nav.profile}</span>
@@ -212,7 +212,7 @@ export default function Navigation({ user }: NavigationProps) {
               <Link
                 href="/settings"
                 onClick={() => setIsMenuOpen(false)}
-                className="flex items-center space-x-3 px-3 py-3 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                className="flex items-center space-x-3 px-4 py-3 text-gray-600 hover:text-gray-900 glass-button rounded-xl transition-all duration-300"
               >
                 <Settings className="w-5 h-5" />
                 <span className="font-medium">{t.nav.settings}</span>
@@ -220,7 +220,7 @@ export default function Navigation({ user }: NavigationProps) {
               
               <button
                 onClick={handleSignOut}
-                className="flex items-center space-x-3 px-3 py-3 text-red-600 hover:bg-red-50 rounded-lg transition-colors w-full text-left"
+                className="flex items-center space-x-3 px-4 py-3 text-red-600 hover:bg-red-50/50 rounded-xl transition-all duration-300 w-full text-left"
               >
                 <LogOut className="w-5 h-5" />
                 <span className="font-medium">{t.nav.logout}</span>

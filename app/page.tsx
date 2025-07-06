@@ -75,16 +75,16 @@ export default function LandingPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100">
+    <div className="min-h-screen gradient-mesh">
       {/* Navigation */}
-      <nav className="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-40">
+      <nav className="glass-nav sticky top-0 z-40">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+              <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center glow-blue floating-element">
                 <Users className="w-6 h-6 text-white" />
               </div>
-              <span className="text-xl font-bold text-gray-900">RealTalk</span>
+              <span className="text-xl font-bold text-gradient-blue">RealTalk</span>
             </div>
             
             <div className="flex items-center space-x-4">
@@ -94,13 +94,13 @@ export default function LandingPage() {
               />
               <Link 
                 href="/auth/login"
-                className="text-gray-600 hover:text-gray-900 font-medium transition-colors"
+                className="text-gray-600 hover:text-gray-900 font-medium transition-all duration-300 px-4 py-2 rounded-xl glass-button floating-element"
               >
                 {t.nav.login}
               </Link>
               <Link 
                 href="/onboarding"
-                className="px-4 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl font-medium hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105"
+                className="px-6 py-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-xl font-medium hover:from-blue-600 hover:to-purple-700 transition-all duration-300 floating-element glow-blue"
               >
                 {t.nav.signUp}
               </Link>
@@ -114,7 +114,7 @@ export default function LandingPage() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <div className={`transition-all duration-1000 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-              <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight whitespace-pre-line">
+              <h1 className="text-5xl md:text-7xl font-bold text-gradient-blue mb-6 leading-tight whitespace-pre-line">
                 {t.landing.title}
               </h1>
               <p className="text-xl md:text-2xl text-gray-600 mb-8 max-w-3xl mx-auto leading-relaxed">
@@ -124,13 +124,13 @@ export default function LandingPage() {
               <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
                 <Link 
                   href="/onboarding"
-                  className="group px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-2xl font-semibold text-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
+                  className="group px-8 py-4 bg-gradient-to-r from-blue-500 to-purple-600 text-white rounded-2xl font-semibold text-lg hover:from-blue-600 hover:to-purple-700 transition-all duration-300 floating-element glow-blue flex items-center space-x-2"
                 >
                   <span>{t.landing.startJourney}</span>
                   <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                 </Link>
                 
-                <button className="group px-8 py-4 bg-white text-gray-700 rounded-2xl font-semibold text-lg border-2 border-gray-200 hover:border-gray-300 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2">
+                <button className="group px-8 py-4 glass-card text-gray-700 rounded-2xl font-semibold text-lg border-2 border-white/30 hover:border-white/50 transition-all duration-300 floating-element flex items-center space-x-2">
                   <Play className="w-5 h-5 group-hover:scale-110 transition-transform" />
                   <span>{t.landing.watchDemo}</span>
                 </button>
@@ -140,13 +140,13 @@ export default function LandingPage() {
 
           {/* Hero Visual */}
           <div className={`relative transition-all duration-1000 delay-300 ${isLoaded ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-8'}`}>
-            <div className="bg-white rounded-3xl shadow-2xl p-8 max-w-4xl mx-auto border border-gray-200">
+            <div className="glass-card rounded-3xl p-8 max-w-4xl mx-auto floating-element">
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {personalities.map((personality, index) => {
                   const IconComponent = personality.icon;
                   return (
-                    <div key={personality.id} className="text-center group cursor-pointer">
-                      <div className={`w-20 h-20 bg-gradient-to-r ${personality.color} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                    <div key={personality.id} className="text-center group cursor-pointer floating-element">
+                      <div className={`w-20 h-20 bg-gradient-to-r ${personality.color} rounded-2xl flex items-center justify-center mx-auto mb-4 group-hover:scale-110 transition-all duration-300 glow-blue animate-float`} style={{animationDelay: `${index * 0.5}s`}}>
                         <IconComponent className="w-10 h-10 text-white" />
                       </div>
                       <h3 className="text-lg font-semibold text-gray-900 mb-2">{personality.title}</h3>
@@ -160,16 +160,17 @@ export default function LandingPage() {
         </div>
 
         {/* Background Elements */}
-        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob" />
-        <div className="absolute top-40 right-10 w-72 h-72 bg-purple-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-2000" />
-        <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-200 rounded-full mix-blend-multiply filter blur-xl opacity-30 animate-blob animation-delay-4000" />
+        <div className="absolute top-20 left-10 w-72 h-72 bg-blue-200/30 rounded-full mix-blend-multiply filter blur-xl animate-float" />
+        <div className="absolute top-40 right-10 w-72 h-72 bg-purple-200/30 rounded-full mix-blend-multiply filter blur-xl animate-float-delayed" />
+        <div className="absolute -bottom-8 left-20 w-72 h-72 bg-pink-200/30 rounded-full mix-blend-multiply filter blur-xl animate-float" style={{animationDelay: '4s'}} />
       </section>
 
       {/* Features Section */}
-      <section className="py-20 px-4 bg-gray-50">
+      <section className="py-20 px-4 relative">
+        <div className="absolute inset-0 bg-gradient-to-b from-white/50 to-transparent" />
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-gradient-purple mb-6">
               {t.landing.whyRealTalk}
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -181,8 +182,8 @@ export default function LandingPage() {
             {features.map((feature, index) => {
               const IconComponent = feature.icon;
               return (
-                <div key={index} className="bg-white rounded-3xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2 border border-gray-100">
-                  <div className={`w-16 h-16 bg-gradient-to-r ${feature.gradient} rounded-2xl flex items-center justify-center mb-6`}>
+                <div key={index} className="glass-card rounded-3xl p-8 transition-all duration-300 floating-element" style={{animationDelay: `${index * 0.2}s`}}>
+                  <div className={`w-16 h-16 bg-gradient-to-r ${feature.gradient} rounded-2xl flex items-center justify-center mb-6 glow-blue animate-pulse-slow`}>
                     <IconComponent className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-4">{feature.title}</h3>
@@ -198,7 +199,7 @@ export default function LandingPage() {
       <section className="py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
+            <h2 className="text-4xl md:text-5xl font-bold text-gradient-orange mb-6">
               {t.landing.howItWorks}
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
@@ -231,10 +232,10 @@ export default function LandingPage() {
               return (
                 <div key={index} className="text-center relative">
                   <div className="relative">
-                    <div className="w-24 h-24 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
+                    <div className="w-24 h-24 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center mx-auto mb-6 glow-purple floating-element animate-pulse-slow" style={{animationDelay: `${index * 0.3}s`}}>
                       <IconComponent className="w-12 h-12 text-white" />
                     </div>
-                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-lg border-2 border-gray-100">
+                    <div className="absolute -top-2 -right-2 w-8 h-8 glass-card rounded-full flex items-center justify-center border-2 border-white/30">
                       <span className="text-sm font-bold text-gray-700">{item.step}</span>
                     </div>
                   </div>
@@ -254,7 +255,10 @@ export default function LandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600">
+      <section className="py-20 px-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 relative overflow-hidden">
+        <div className="absolute inset-0 bg-black/10" />
+        <div className="absolute top-10 left-10 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-float" />
+        <div className="absolute bottom-10 right-10 w-64 h-64 bg-white/10 rounded-full blur-3xl animate-float-delayed" />
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
             {t.landing.readyForConnections}
@@ -266,7 +270,7 @@ export default function LandingPage() {
           <div className="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-6">
             <Link 
               href="/onboarding"
-              className="group px-8 py-4 bg-white text-gray-900 rounded-2xl font-semibold text-lg hover:bg-gray-100 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl flex items-center space-x-2"
+              className="group px-8 py-4 glass-card text-gray-900 rounded-2xl font-semibold text-lg hover:bg-white/90 transition-all duration-300 floating-element flex items-center space-x-2"
             >
               <span>{t.landing.startFree}</span>
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -281,15 +285,15 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12 px-4">
+      <footer className="bg-gray-900/95 backdrop-blur-xl text-white py-12 px-4 border-t border-white/10">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="col-span-1 md:col-span-2">
               <div className="flex items-center space-x-3 mb-4">
-                <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center">
+                <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-xl flex items-center justify-center glow-blue">
                   <Users className="w-6 h-6 text-white" />
                 </div>
-                <span className="text-xl font-bold">RealTalk</span>
+                <span className="text-xl font-bold text-gradient-blue">RealTalk</span>
               </div>
               <p className="text-gray-400 leading-relaxed max-w-md">
                 {language === 'en' 
@@ -302,46 +306,27 @@ export default function LandingPage() {
             <div>
               <h3 className="font-semibold mb-4">Product</h3>
               <ul className="space-y-2 text-gray-400">
-                <li><Link href="/features" className="hover:text-white transition-colors">Features</Link></li>
-                <li><Link href="/pricing" className="hover:text-white transition-colors">Pricing</Link></li>
-                <li><Link href="/security" className="hover:text-white transition-colors">Security</Link></li>
+                <li><Link href="/features" className="hover:text-white transition-all duration-300 hover:translate-x-1">Features</Link></li>
+                <li><Link href="/pricing" className="hover:text-white transition-all duration-300 hover:translate-x-1">Pricing</Link></li>
+                <li><Link href="/security" className="hover:text-white transition-all duration-300 hover:translate-x-1">Security</Link></li>
               </ul>
             </div>
             
             <div>
               <h3 className="font-semibold mb-4">Support</h3>
               <ul className="space-y-2 text-gray-400">
-                <li><Link href="/help" className="hover:text-white transition-colors">Help Center</Link></li>
-                <li><Link href="/contact" className="hover:text-white transition-colors">Contact</Link></li>
-                <li><Link href="/privacy" className="hover:text-white transition-colors">Privacy</Link></li>
+                <li><Link href="/help" className="hover:text-white transition-all duration-300 hover:translate-x-1">Help Center</Link></li>
+                <li><Link href="/contact" className="hover:text-white transition-all duration-300 hover:translate-x-1">Contact</Link></li>
+                <li><Link href="/privacy" className="hover:text-white transition-all duration-300 hover:translate-x-1">Privacy</Link></li>
               </ul>
             </div>
           </div>
           
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+          <div className="border-t border-white/10 mt-8 pt-8 text-center text-gray-400">
             <p>&copy; 2025 RealTalk. {language === 'en' ? 'All rights reserved.' : 'Alle rechten voorbehouden.'}</p>
           </div>
         </div>
       </footer>
-
-      {/* Custom Animations */}
-      <style jsx>{`
-        @keyframes blob {
-          0% { transform: translate(0px, 0px) scale(1); }
-          33% { transform: translate(30px, -50px) scale(1.1); }
-          66% { transform: translate(-20px, 20px) scale(0.9); }
-          100% { transform: translate(0px, 0px) scale(1); }
-        }
-        .animate-blob {
-          animation: blob 7s infinite;
-        }
-        .animation-delay-2000 {
-          animation-delay: 2s;
-        }
-        .animation-delay-4000 {
-          animation-delay: 4s;
-        }
-      `}</style>
     </div>
   );
 }
