@@ -60,7 +60,7 @@ export interface Translations {
   // Onboarding
   onboarding: {
     choosePersona: string;
-    chooseDescription: string;
+    chooseDescription: 'Selecteer hoe je jezelf wilt presenteren: Roots, Mask, of Spark.',
     rootsTitle: string;
     rootsDesc: string;
     maskTitle: string;
